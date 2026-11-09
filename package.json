@@ -1,0 +1,9 @@
+{
+  "name": "dust-traffic-light",
+  "version": "1.0.0",
+  "private": true,
+  "description": "에어코리아 공공데이터를 활용한 우리 동네 미세먼지 신호등",
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}

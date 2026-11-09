@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f8f4">
+  <title>우리 동네 미세먼지 신호등</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="미세먼지 신호등 홈">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>우리 동네 <b>미세먼지 신호등</b></span>
+      </a>
+      <span class="live-label"><i></i> 실시간 대기정보</span>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">AIR QUALITY · LOCAL WEATHER</p>
+        <h1>오늘 공기, <span>한눈에 확인해요.</span></h1>
+        <p class="intro-copy">우리 동네 대기질을 확인하고 오늘의 외출을 준비해 보세요.</p>
+      </section>
+
+      <section class="toolbar card">
+        <div>
+          <label for="region">지역 선택</label>
+          <select id="region">
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+            <option value="대구">대구</option>
+            <option value="인천">인천</option>
+            <option value="광주">광주</option>
+            <option value="대전">대전</option>
+            <option value="울산">울산</option>
+            <option value="세종">세종</option>
+            <option value="경기">경기</option>
+            <option value="강원">강원</option>
+            <option value="충북">충북</option>
+            <option value="충남">충남</option>
+            <option value="전북">전북</option>
+            <option value="전남">전남</option>
+            <option value="경북">경북</option>
+            <option value="경남">경남</option>
+            <option value="제주">제주</option>
+          </select>
+        </div>
+        <button id="refresh" class="refresh-button" type="button"><span aria-hidden="true">↻</span> 새로고침</button>
+      </section>
+
+      <div id="status" class="status" role="status" aria-live="polite">대기질 정보를 불러오고 있어요.</div>
+
+      <section class="hero-grid">
+        <article class="main-card card" id="mainCard">
+          <div class="section-heading">
+            <div>
+              <p class="card-kicker">CURRENT AIR QUALITY</p>
+              <h2>현재 우리 동네 대기질</h2>
+            </div>
+            <span class="station-chip" id="stationName">측정소 확인 중</span>
+          </div>
+          <div class="air-summary">
+            <div class="traffic-light" id="trafficLight" aria-label="대기질 신호등">
+              <span class="light red"></span><span class="light yellow"></span><span class="light green"></span><span class="light blue"></span>
+            </div>
+            <div class="air-copy">
+              <p class="air-grade" id="gradeText">정보 확인 중</p>
+              <p class="air-message" id="gradeMessage">잠시만 기다려 주세요.</p>
+              <p class="updated" id="updatedAt">측정 시각 -</p>
+            </div>
+          </div>
+          <div class="main-divider"></div>
+          <div class="pollutant-grid">
+            <div class="pollutant">
+              <span class="pollutant-name">미세먼지 PM10</span>
+              <strong id="pm10Value">-- <small>㎍/㎥</small></strong>
+              <span class="mini-grade" id="pm10Grade">측정 대기</span>
+            </div>
+            <div class="pollutant">
+              <span class="pollutant-name">초미세먼지 PM2.5</span>
+              <strong id="pm25Value">-- <small>㎍/㎥</small></strong>
+              <span class="mini-grade" id="pm25Grade">측정 대기</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="side-card card">
+          <p class="card-kicker">TODAY'S GUIDE</p>
+          <h2>오늘의 외출 가이드</h2>
+          <div class="guide-icon" id="guideIcon">☀</div>
+          <h3 id="guideTitle">정보를 불러오는 중</h3>
+          <p id="guideText">대기질에 맞는 외출 팁을 안내해 드릴게요.</p>
+          <div class="guide-foot">측정소별 실시간 관측값 기준</div>
+        </aside>
+      </section>
+
+      <section class="stations-section">
+        <div class="section-heading station-heading">
+          <div>
+            <p class="card-kicker">NEARBY MONITORING STATIONS</p>
+            <h2>지역별 측정소 정보</h2>
+          </div>
+          <span id="stationCount" class="count-label">0개 측정소</span>
+        </div>
+        <div class="table-wrap card">
+          <div class="station-table-head">
+            <span>측정소</span><span>PM10</span><span>PM2.5</span><span>통합 대기질</span>
+          </div>
+          <div id="stationList" class="station-list">
+            <div class="empty-row">측정소 정보를 불러오고 있어요.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="legend-section card">
+        <div>
+          <p class="card-kicker">AIR QUALITY STANDARD</p>
+          <h2>미세먼지 등급 안내</h2>
+          <p class="legend-copy">농도에 따라 대기질을 4단계로 구분해요.</p>
+        </div>
+        <div class="legend-items">
+          <div><i class="dot blue"></i><b>좋음</b><span>쾌적한 대기</span></div>
+          <div><i class="dot green"></i><b>보통</b><span>일상 활동 가능</span></div>
+          <div><i class="dot orange"></i><b>나쁨</b><span>장시간 외출 주의</span></div>
+          <div><i class="dot red"></i><b>매우나쁨</b><span>외출 자제 권장</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>DATA SOURCE <b>한국환경공단 에어코리아</b></p>
+      <p>본 서비스는 공공데이터를 활용한 정보 제공용 웹앱입니다. 실제 건강·행동 판단 시 공식 예보를 함께 확인해 주세요.</p>
+    </footer>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>
